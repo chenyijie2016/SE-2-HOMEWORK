@@ -34,34 +34,34 @@
 
 |     名称     |             备注              | 
 | :----------: | :--------------------------: |
-| CFileFind::CFileFind | Constructs a ``CFileFind`` object. |
+| CFileFind | Constructs a ``CFileFind`` object. |
 
 * 公共方法
 
 |     名称     |             备注              | 
 | :----------: | :--------------------------: |
-| CFileFind::Close | Closes the search request. |
-| CFileFind::FindFile | Searches a directory for a specified file name. |
-| CFileFind::FindNextFile | Continues a file search from a previous call to FindFile. |
-| CFileFind::GetCreationTime | Gets the time the file was created. |
-| CFileFind::GetFileName | Gets the name, including the extension, of the found file |
-| CFileFind::GetFilePath | Gets the whole path of the found file. |
-| CFileFind::GetFileTitle | Gets the title of the found file. The title does not include the extension. |
-| CFileFind::GetFileURL | Gets the URL, including the file path, of the found file. |
-| CFileFind::GetLastAccessTime | Gets the time that the file was last accessed. |
-| CFileFind::GetLastWriteTime | Gets the time the file was last changed and saved. |
-| CFileFind::GetLength | Gets the length of the found file, in bytes. |
-| CFileFind::GetRoot | Gets the root directory of the found file. |
-| CFileFind::IsArchived | Determines if the found file is archived. |
-| CFileFind::IsCompressed | Determines if the found file is compressed. |
-| CFileFind::IsDirectory |　Determines if the found file is a directory.　|
-| CFileFind::IsDots | Determines if the name of the found file has the name "." or "..", indicating that is actually a directory.|
-| CFileFind::IsHidden | Determines if the found file is hidden.| 
-| CFileFind::IsNormal | Determines if the found file is normal (in other words, has no other attributes).|
-| CFileFind::IsReadOnly | 	Determines if the found file is read-only. |
-| CFileFind::IsSystem | Determines if the found file is a system file. |
-| CFileFind::IsTemporary | Determines if the found file is temporary.|
-| CFileFind::MatchesMask | Indicates the desired file attributes of the file to be found.| 
+| Close | Closes the search request. |
+| FindFile | Searches a directory for a specified file name. |
+| FindNextFile | Continues a file search from a previous call to FindFile. |
+| GetCreationTime | Gets the time the file was created. |
+| GetFileName | Gets the name, including the extension, of the found file |
+| GetFilePath | Gets the whole path of the found file. |
+| GetFileTitle | Gets the title of the found file. The title does not include the extension. |
+| GetFileURL | Gets the URL, including the file path, of the found file. |
+| GetLastAccessTime | Gets the time that the file was last accessed. |
+| GetLastWriteTime | Gets the time the file was last changed and saved. |
+| GetLength | Gets the length of the found file, in bytes. |
+| GetRoot | Gets the root directory of the found file. |
+| IsArchived | Determines if the found file is archived. |
+| IsCompressed | Determines if the found file is compressed. |
+| IsDirectory |　Determines if the found file is a directory.　|
+| IsDots | Determines if the name of the found file has the name "." or "..", indicating that is actually a directory.|
+| IsHidden | Determines if the found file is hidden.| 
+| IsNormal | Determines if the found file is normal (in other words, has no other attributes).|
+| IsReadOnly | 	Determines if the found file is read-only. |
+| IsSystem | Determines if the found file is a system file. |
+| IsTemporary | Determines if the found file is temporary.|
+| MatchesMask | Indicates the desired file attributes of the file to be found.| 
 
 * 受保护方法
 
@@ -81,5 +81,11 @@
 
 ### 函数原型介绍
 
+#### ``FindFile``介绍
+
+    virtual BOOL FindFile(
+    LPCTSTR pstrName = NULL,  
+    DWORD dwUnused = 0);
+    
 ### 具体使用
 
