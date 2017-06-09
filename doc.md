@@ -22,11 +22,13 @@
 
 ## 文件遍历及路径处理
 
-> 由于我在大作业讨论区中发现已经有人完成了文件路径处理的一部分工作。其使用了``io.h``这一处理文件的库。为避免重复，我将使用MFC中的``CFileFind``类进行介绍。
+> 由于我在大作业讨论区中发现已经有人完成了文件路径处理的一部分工作。其使用了``io.h``这一处理文件的库。我之前版本也使用了相同的文件路径处理方法，为避免重复，我将使用MFC中的``CFileFind``类进行介绍。
 
 ### CFileFind类的基本介绍
 
 先来看一下[MSDN](https://msdn.microsoft.com/en-us/library/f33e1618.aspx)上关于``CFileFind``类的文档
+
+> 以下均省略类名``CFileFind``
 
 * 公共构造函数
 
@@ -39,8 +41,45 @@
 |     名称     |             备注              | 
 | :----------: | :--------------------------: |
 | CFileFind::Close | Closes the search request. |
-| 
+| CFileFind::FindFile | Searches a directory for a specified file name. |
+| CFileFind::FindNextFile | Continues a file search from a previous call to FindFile. |
+| CFileFind::GetCreationTime | Gets the time the file was created. |
+| CFileFind::GetFileName | Gets the name, including the extension, of the found file |
+| CFileFind::GetFilePath | Gets the whole path of the found file. |
+| CFileFind::GetFileTitle | Gets the title of the found file. The title does not include the extension. |
+| CFileFind::GetFileURL | Gets the URL, including the file path, of the found file. |
+| CFileFind::GetLastAccessTime | Gets the time that the file was last accessed. |
+| CFileFind::GetLastWriteTime | Gets the time the file was last changed and saved. |
+| CFileFind::GetLength | Gets the length of the found file, in bytes. |
+| CFileFind::GetRoot | Gets the root directory of the found file. |
+| CFileFind::IsArchived | Determines if the found file is archived. |
+| CFileFind::IsCompressed | Determines if the found file is compressed. |
+| CFileFind::IsDirectory |　Determines if the found file is a directory.　|
+| CFileFind::IsDots | Determines if the name of the found file has the name "." or "..", indicating that is actually a directory.|
+| CFileFind::IsHidden | Determines if the found file is hidden.| 
+| CFileFind::IsNormal | Determines if the found file is normal (in other words, has no other attributes).|
+| CFileFind::IsReadOnly | 	Determines if the found file is read-only. |
+| CFileFind::IsSystem | Determines if the found file is a system file. |
+| CFileFind::IsTemporary | Determines if the found file is temporary.|
+| CFileFind::MatchesMask | Indicates the desired file attributes of the file to be found.| 
 
+* 受保护方法
+
+|     名称     |             备注              | 
+| :----------: | :--------------------------: |
+| CFileFind::CloseContext | Closes the file specified by the current search handle.|
+
+* 受保护的数据成员
+
+|     名称     |             备注              | 
+| :----------: | :--------------------------: |
+| CFileFind::m_pTM | Pointer to a ``CAtlTransactionManager`` object. |
+
+受于内容相关性及研究深度所限，我只打算对我们需要在文件遍历中使用的方法进行介绍，包括以下内容
+
+``FindFile``、``GetFileName``、
+
+### 具体使用
 
 
 
