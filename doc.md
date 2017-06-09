@@ -77,9 +77,9 @@
 
 受于内容相关性及研究深度所限，我只打算对我们需要在文件遍历中使用的方法进行介绍，包括以下内容
 
-``FindFile``、``GetFileName``、
+``FindFile``、``GetFileName``、``FindNextFile``、``GetFilePath``、``IsDots``
+
+### 函数原型介绍
 
 ### 具体使用
-
-
 
