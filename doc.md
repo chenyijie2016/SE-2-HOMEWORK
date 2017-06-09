@@ -24,6 +24,23 @@
 
 > 由于我在大作业讨论区中发现已经有人完成了文件路径处理的一部分工作。其使用了``io.h``这一处理文件的库。为避免重复，我将使用MFC中的``CFileFind``类进行介绍。
 
+### CFileFind类的基本介绍
+
+先来看一下[MSDN](https://msdn.microsoft.com/en-us/library/f33e1618.aspx)上关于``CFileFind``类的文档
+
+* 公共构造函数
+
+|     名称     |             备注              | 
+| :----------: | :--------------------------: |
+| CFileFind::CFileFind | Constructs a ``CFileFind`` object. |
+
+* 公共方法
+
+|     名称     |             备注              | 
+| :----------: | :--------------------------: |
+| CFileFind::Close | Closes the search request. |
+| 
+
 
 
 
