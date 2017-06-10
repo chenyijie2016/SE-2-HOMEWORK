@@ -77,7 +77,7 @@
 
 受于内容相关性及研究深度所限，我只打算对我们需要在文件遍历中使用的方法进行介绍，包括以下内容
 
-``FindFile``、``GetFileName``、``FindNextFile``、``GetFilePath``、``IsDots``
+``FindFile``、``GetFileName``、``FindNextFile``、``GetFilePath``、``IsDots`` 、``IsDirectory``
 
 ### 函数原型介绍
 
@@ -87,11 +87,74 @@
     LPCTSTR pstrName = NULL,  
     DWORD dwUnused = 0);
 ``` 
-    
-#### ``GetFileName`` 介绍
+参数说明:
+
+* pstrName: A pointer to a string containing the name of the file to find. If you pass NULL for pstrName, FindFile does a wildcard (*.*) search.
+
+* dwUnused: Reserved to make FindFile polymorphic with derived classes. Must be 0.
+
+#### ``GetFileName``、``GetFilePath``、``GetFileTitle`` 介绍
 ```c++
     virtual CString GetFileName() const;  
+    
+    virtual CString GetFilePath() const; 
+    
+    virtual CString GetFileTitle() const;  
 ```
+区别与联系:  
+
+> 以``c:\myhtml\myfile.txt``文件为例
+
+* ``GetFileName`` 返回完整文件名:``myfile.txt``
+* ``GetFilePath`` 返回文件名及完整路径:``c:\myhtml\myfile.txt``
+* ``GetFileTitle`` 返回文件名(不带扩展名):``myfile``
+
+
 
 ### 具体使用
+
+```c++
+void FindFile(CString strDir, vector<CString> & fileList)
+{
+
+	CFileFind ff;
+	CString szDir = strDir;
+	
+	wcout <<"目录: " << LPCTSTR(szDir) << endl;
+	
+	//如果目录最后不是"\\"就添加上(windows系统)
+	if (szDir.Right(1) != "\\")
+		szDir += "\\";
+    //加上"*.*"表示查找所有文件、文件夹
+	szDir += "*.*";
+    
+    
+	BOOL res = ff.FindFile(szDir);
+	wcout << res;
+	
+	while (res)//如果该目录下还存在文件就继续遍历
+	{
+        //继续寻找下一个文件
+		res = ff.FindNextFile();
+		
+		//如果不是文件夹
+		if (!ff.IsDirectory())
+		{
+		    
+			wcout <<"文件: "<< LPCTSTR(ff.GetFileName()) << endl;
+			//找到了，加入文件列表中
+			fileList.push_back(ff.GetFilePath());
+			
+		}
+
+		if (ff.IsDirectory() && !ff.IsDots())
+		{
+			//如果是一个子目录，用递归继续往深一层找
+			FindFile(ff.GetFilePath(), fileList);
+		}
+	}
+	ff.Close();//关闭
+}
+    
+```
 
