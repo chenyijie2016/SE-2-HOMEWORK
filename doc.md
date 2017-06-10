@@ -67,13 +67,13 @@
 
 |     名称     |             备注              | 
 | :----------: | :--------------------------: |
-| CFileFind::CloseContext | Closes the file specified by the current search handle.|
+| CloseContext | Closes the file specified by the current search handle.|
 
 * 受保护的数据成员
 
 |     名称     |             备注              | 
 | :----------: | :--------------------------: |
-| CFileFind::m_pTM | Pointer to a ``CAtlTransactionManager`` object. |
+| m_pTM | Pointer to a ``CAtlTransactionManager`` object. |
 
 受于内容相关性及研究深度所限，我只打算对我们需要在文件遍历中使用的方法进行介绍，包括以下内容
 
@@ -82,10 +82,16 @@
 ### 函数原型介绍
 
 #### ``FindFile``介绍
-
+```c++
     virtual BOOL FindFile(
     LPCTSTR pstrName = NULL,  
     DWORD dwUnused = 0);
+``` 
     
+#### ``GetFileName`` 介绍
+```c++
+    virtual CString GetFileName() const;  
+```
+
 ### 具体使用
 
