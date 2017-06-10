@@ -110,17 +110,31 @@
 * ``GetFileTitle`` 返回文件名(不带扩展名):``myfile``
 
 
-
-### 具体使用
+### ``IsDirectory``、``IsDots``介绍
 
 ```c++
+    BOOL IsDirectory() const;
+    virtual BOOL IsDots() const;
+```
+
+说明:
+* ``IsDirectory``用于判断该当前对象是不是一个文件夹
+* ``IsDots`` 用于判断该当前对象是不是 "." 或者 ".."
+
+
+### 具体使用(遍历文件夹及子目录)
+
+```c++
+//需要在MFC环境中运用
+
 #include <vector>
 #include "stdafx.h"
+
 //************************************
 // FullName:  FindFile
 // Returns:   void
-// Parameter: CString strDir
-// Parameter: vector<CString> & fileList
+// Parameter: CString strDir: 需要遍历的文件夹
+// Parameter: vector<CString> & fileList :存储该文件夹及子文件夹中所有文件的绝对路径
 //************************************
 void FindFile(CString strDir, vector<CString> & fileList)
 {
