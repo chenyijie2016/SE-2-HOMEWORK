@@ -114,6 +114,14 @@
 ### 具体使用
 
 ```c++
+#include <vector>
+#include "stdafx.h"
+//************************************
+// FullName:  FindFile
+// Returns:   void
+// Parameter: CString strDir
+// Parameter: vector<CString> & fileList
+//************************************
 void FindFile(CString strDir, vector<CString> & fileList)
 {
 
@@ -125,7 +133,7 @@ void FindFile(CString strDir, vector<CString> & fileList)
 	//如果目录最后不是"\\"就添加上(windows系统)
 	if (szDir.Right(1) != "\\")
 		szDir += "\\";
-    //加上"*.*"表示查找所有文件、文件夹
+	//加上"*.*"表示查找所有文件、文件夹
 	szDir += "*.*";
     
     
@@ -134,17 +142,15 @@ void FindFile(CString strDir, vector<CString> & fileList)
 	
 	while (res)//如果该目录下还存在文件就继续遍历
 	{
-        //继续寻找下一个文件
+                //继续寻找下一个文件
 		res = ff.FindNextFile();
 		
 		//如果不是文件夹
 		if (!ff.IsDirectory())
 		{
-		    
 			wcout <<"文件: "<< LPCTSTR(ff.GetFileName()) << endl;
 			//找到了，加入文件列表中
 			fileList.push_back(ff.GetFilePath());
-			
 		}
 
 		if (ff.IsDirectory() && !ff.IsDots())
