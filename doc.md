@@ -220,6 +220,129 @@ void FindFile(CString strDir, vector<CString> & fileList)
 
 由于MD5算法的过程较为复杂，我直接使用了网络上提供的库,以下是接口说明.
 
+文件 ``md5.h``
+```c++
+#ifndef MD5_H   
+#define MD5_H   
+
+#include <string>   
+#include <fstream>   
+
+/* Type define */
+typedef unsigned char byte;
+typedef unsigned int uint32;
+
+using std::string;
+using std::ifstream;
+
+/* MD5 declaration. */
+class MD5 {
+public:
+        /* 构造函数 */  
+	MD5();
+	MD5(const void* input, size_t length);
+	MD5(const string& str);//字符串
+	MD5(ifstream& in);//文件
+	
+	/* 成员函数 */
+	void update(const void* input, size_t length);
+	void update(const string& str);
+	void update(ifstream& in);
+	
+	const byte* digest();
+	string toString();
+	void reset();
+	string ToMD5(const string& str);//如此，只需调用该函数便完成加密过程  
+
+private:
+	void update(const byte* input, size_t length);
+	void final();
+	void transform(const byte block[64]);
+	void encode(const uint32* input, byte* output, size_t length);
+	void decode(const byte* input, uint32* output, size_t length);
+	string bytesToHexString(const byte* input, size_t length);
+
+
+	/* class uncopyable (对象不可以被拷贝)*/
+	MD5(const MD5&);
+	MD5& operator=(const MD5&);
+
+private:
+	uint32 _state[4]; /* state (ABCD) */
+	uint32 _count[2]; /* number of bits, modulo 2^64 (low-order word first) */
+	byte _buffer[64]; /* input buffer */
+	byte _digest[16]; /* message digest */
+	bool _finished; /* calculate finished ? */
+
+	static const byte PADDING[64]; /* padding for calculate */
+	static const char HEX[16];
+	enum { BUFFER_SIZE = 1024 };
+};
+
+#endif /*MD5_H*/
+
+```
+
+文件 ``MD5.cpp``(部分)
+
+```c++
+//以上内容省略
+
+/* Updating the context with a file. */
+void MD5::update(ifstream& in) {
+
+	if (!in) {
+		return;
+	}
+
+	std::streamsize length;
+	char buffer[BUFFER_SIZE];
+	while (!in.eof()) {
+		in.read(buffer, BUFFER_SIZE);
+		length = in.gcount();
+		if (length > 0) {
+			update(buffer, length);
+		}
+	}
+	in.close();
+}
+
+//以下内容省略
+......
+......
+//以上内容省略
+
+/* Convert byte array to hex string. */
+string MD5::bytesToHexString(const byte* input, size_t length) {
+
+	string str;
+	str.reserve(length << 1);
+	for (size_t i = 0; i < length; ++i) {
+		int t = input[i];
+		int a = t / 16;
+		int b = t % 16;
+		str.append(1, HEX[a]);
+		str.append(1, HEX[b]);
+	}
+	return str;
+}
+
+/* Convert digest to string value */
+string MD5::toString() {
+	return bytesToHexString(digest(), 16);
+}
+
+//以下内容省略
+
+```
+通过重载的构造函数``MD5()``我们可以传入字符串或者输入文件流。
+
+我们需要将文件或者字符串通过重载的成员函数``update()``传入来获取计算结果。
+
+从文件``MD5.cpp``中关于使用文件流来更新MD5数据的重载函数来看，因为文件可能很大，我们需要将其分段读入，依次分段处理，下面我们将会说明，这种
+边读边算的方法是不会改变最终的结果的。
+
+我们可以随时通过``toString()``函数来获取当前计算的MD5值
 
 
 
