@@ -344,8 +344,23 @@ string MD5::toString() {
 
 我们可以随时通过``toString()``函数来获取当前计算的MD5值
 
+> * 用法示例
+```c++
+#include "md5.h"
+#include<iostream>
+void test()
+{
+	MD5 md5;
+	
+	md5.reset()
+	
+	md5.upadte("abc");
+	
+	std::cout << md5.toString();
 
+}
 
+```
 
 #### MD5算法
 
