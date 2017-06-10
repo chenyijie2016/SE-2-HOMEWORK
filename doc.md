@@ -26,6 +26,7 @@
     - [在本项目中的应用](#在本项目中的应用)
     - [MD5算法过程](#MD5算法过程)
 - [MFC文件选取控件简介](#MFC文件选取控件简介)
+- [测试与验证](#)
 - [参考文献](#参考文献)
 ## 文件遍历及路径处理
 
@@ -35,7 +36,7 @@
 
 先来看一下[MSDN](https://msdn.microsoft.com/en-us/library/f33e1618.aspx)上关于``CFileFind``类的文档
 
-> 以下均省略类名``CFileFind``
+> 以下均省略类名``CFileFind``。中文[MSDN](https://msdn.microsoft.com/zh-cn/library/f33e1618.aspx)中采用了机器翻译，部分字词逻辑不清晰甚至错误，因此我只引用了英文MSDN中的内容
 
 * 公共构造函数
 
@@ -98,7 +99,11 @@
 
 * pstrName: A pointer to a string containing the name of the file to find. If you pass NULL for pstrName, FindFile does a wildcard (*.*) search.
 
+即一个指向存储文件路径字符串的指针,如果传入NULL,则其会按照通配符"\*.*"进行查找
+
 * dwUnused: Reserved to make FindFile polymorphic with derived classes. Must be 0.
+
+必须为0,使用时无需关注
 
 #### ``GetFileName``、``GetFilePath``、``GetFileTitle`` 介绍
 ```c++
@@ -125,8 +130,8 @@
 ```
 
 说明:
-* ``IsDirectory``用于判断该当前对象是不是一个文件夹
-* ``IsDots`` 用于判断该当前对象是不是 "." 或者 ".."
+* ``IsDirectory``用于判断该当前文件是不是一个文件夹
+* ``IsDots`` 用于判断该当前文件是不是 "." 或者 "..",即当前文件是不是当前目录的父文件夹
 
 
 ### 具体使用(遍历文件夹及子目录)
@@ -209,9 +214,9 @@ void FindFile(CString strDir, vector<CString> & fileList)
 
 ### 在本项目中的应用
 
-> 在本项目中，我使用了密码散列函数中的``MD5``算法  
+在本项目中，我使用了密码散列函数中的``MD5``算法
 
-> MD5消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由罗纳德·李维斯特设计，于1992年公开，用以取代MD4算法。这套算法的程序在 RFC 1321 中被加以规范。
+> MD5消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由罗纳德·李维斯特设计，于1992年公开，用以取代MD4算法。
 
 #### MD5算法过程
 
@@ -255,6 +260,18 @@ void FindFile(CString strDir, vector<CString> & fileList)
 > 因此，我将对该控件进行一些介绍
 
 
+## 测试与验证
 
+### 文件查询与路径处理的验证
+
+### 文件查重算法的验证
 
 ## 参考文献
+
+1. MSDN CFileFind Class: https://msdn.microsoft.com/zh-cn/library/f33e1618.aspx
+
+2. 维基百科-散列函数: https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B8
+
+3. 维基百科-MD5: https://en.wikipedia.org/wiki/MD5
+
+4. 百度百科-MD5: https://en.wikipedia.org/wiki/MD5
