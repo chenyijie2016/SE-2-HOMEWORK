@@ -334,17 +334,17 @@ string MD5::toString() {
 //以下内容省略
 
 ```
-通过重载的构造函数``MD5()``我们可以传入字符串或者输入文件流。
+* 通过重载的构造函数``MD5()``我们可以传入字符串或者输入文件流。
 
-我们需要将文件或者字符串通过重载的成员函数``update()``传入来获取计算结果。
+* 我们需要将文件或者字符串通过重载的成员函数``update()``传入来获取计算结果。
 
-从文件``MD5.cpp``中关于使用文件流来更新MD5数据的重载函数来看，因为文件可能很大，我们需要将其分段读入，依次分段处理，下面我们将会说明，这种边读边算的方法是不会改变最终的结果的。
+* 从文件``MD5.cpp``中关于使用文件流来更新MD5数据的重载函数来看，因为文件可能很大，我们需要将其分段读入，依次分段处理，下面我们将会说明，这种边读边算的方法是不会改变最终的结果的。
 
-我们可以随时通过``toString()``函数来获取当前计算的MD5值
+* 我们可以随时通过``toString()``函数来获取当前计算的MD5值
 
-计算完一个结果后,我们可以调用``reset()``函数来清空结果
+* 计算完一个结果后,我们可以调用``reset()``函数来清空结果
 
-> 用法示例
+用法示例
 
 ```c++  
 #include "md5.h"
@@ -417,18 +417,60 @@ MFC中文件选取控件名为:``MFC Edit Browse Control``
 
 > 测试1：TEST1
 
+测试说明:
+
+测试使用绝对路径
+
 测试输入:
 
 ```
-
+F:\\TEST1
 ```
 
 输出结果:
 
 ```
+目录: F:\\test1
+文件: F:\test1\doc1.txt
+文件: F:\test1\doc2.txt
+目录: F:\test1\path1
+目录: F:\test1\path1\P1
+目录: F:\test1\path1\P1\P1
+文件: F:\test1\path1\P1\P1\main.cpp
+文件: F:\test1\path1\P1\P1\P1.vcxproj
+文件: F:\test1\path1\P1\P1\P1.vcxproj.filters
+文件: F:\test1\path1\P1\P1\P1.vcxproj.user
+文件: F:\test1\path1\P1\P1\Sum.cpp
+文件: F:\test1\path1\P1\P1\Sum.h
+文件: F:\test1\path1\P1\P1\test.cpp
+文件: F:\test1\path1\P1\P1\test.h
+文件: F:\test1\path1\P1\P1.sln
+目录: F:\test1\path1\P2
+目录: F:\test1\path1\P2\P2
+文件: F:\test1\path1\P2\P2\gcd.cpp
+文件: F:\test1\path1\P2\P2\gcd.h
+文件: F:\test1\path1\P2\P2\main.cpp
+文件: F:\test1\path1\P2\P2\P2.vcxproj
+文件: F:\test1\path1\P2\P2\P2.vcxproj.filters
+文件: F:\test1\path1\P2\P2\result.txt
+文件: F:\test1\path1\P2\P2\test.cpp
+文件: F:\test1\path1\P2\P2\test.h
+文件: F:\test1\path1\P2\P2.sln
+目录: F:\test1\path2
+文件: F:\test1\path2\exc.xlsx
+文件: F:\test1\path2\exc1.xlsx
+目录: F:\test1\path3
+目录: F:\test1\path3\1
+目录: F:\test1\path3\1\2
+目录: F:\test1\path3\1\2\3
+文件: F:\test1\path3\1\2\3\123.txt
 
+共有文件数目: 23
 
 ```
+依照上述测试结果，文件遍历部分已经能够达到预期的效果.
+
+已知bug：当文件名中含有中文时会出现一些问题，此时文件数目可以正常统计，说明文件可以正常遍历，但是会在遇到中文文件名时停止输出文件信息。
 
 ### 文件查重算法的验证
 
