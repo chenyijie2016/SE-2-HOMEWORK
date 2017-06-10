@@ -189,7 +189,9 @@ void FindFile(CString strDir, vector<CString> & fileList)
 }
     
 ```
+> 参考代码[MFC递归遍历目录下所有子目录和文件](http://blog.csdn.net/pc620/article/details/6372251)
 
+到此，我们获得了目标路径及其子文件夹下的所有文件的绝对路径
 
 ## 散列函数简介  
 
@@ -214,11 +216,17 @@ void FindFile(CString strDir, vector<CString> & fileList)
 
 ### 在本项目中的应用
 
-在本项目中，我使用了密码散列函数中的``MD5``算法
+在本项目中，我使用了密码散列函数中的``MD5``算法(说明见下)
 
-> MD5消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由罗纳德·李维斯特设计，于1992年公开，用以取代MD4算法。
+由于MD5算法的过程较为复杂，我直接使用了网络上提供的库,以下是接口说明.
 
-#### MD5算法过程
+
+
+
+
+#### MD5算法
+
+MD5消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由罗纳德·李维斯特设计，于1992年公开，用以取代MD4算法。
 
 > 由于MD5算法过程较为复杂且基于较多的常量，在此只为简单介绍
 
@@ -255,9 +263,11 @@ void FindFile(CString strDir, vector<CString> & fileList)
 > 以上文字内容来自[百度百科-MD5](http://baike.baidu.com/item/MD5)(有删改)
 
 ## MFC文件选取控件简介
+MFC中文件选取控件名为:``MFC Edit Browse Control``
 
 > 由于我设计的是基于MFC的文件查重软件，而MFC中已经具有可以选择文件路径或者文件的控件，使用它可以极大的简化用户输入文件夹路径的过程。
-> 因此，我将对该控件进行一些介绍
+> 并且，在大作业选题声明中没有人选择``参考选题4.36``（介绍）
+> 因此，我将对该控件进行一些简要介绍
 
 
 ## 测试与验证
